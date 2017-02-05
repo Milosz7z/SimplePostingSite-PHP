@@ -21,6 +21,7 @@ session_start();
    <li><a href="form.php" title="Formualarz rejestracji">Formularz rejestracji</a></li>
    <li><a href="login.php" title="Formualarz logowania">Formularz logowania</a></li>
    <li><a href="userpanel.php" title="Plik dla zalogowanych użytkowników">Panel użytkownika</a></li>
+   <li><a href="adminpanel.php" title="Plik dla zalogowanych użytkowników">Panel administratora</a></li>
   </ul>
  </nav>
 
@@ -50,8 +51,12 @@ session_start();
                 $result = $mysqli -> query("SELECT login FROM `user` WHERE login = '$login' and password = '$password'");
                 if ($result -> num_rows == 1) {
                     $row = $result -> fetch_row();
+                    $username = $row[0];
+                    $_SESSION['userlogin'] = $username;
                     $_SESSION['nick'] = $row[0];
+
                     setcookie('islogged', 'islogged', time() + 3600); // 1h
+
                     header('Location: userpanel.php');
                     
                 } else {

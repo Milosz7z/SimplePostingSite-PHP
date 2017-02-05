@@ -22,9 +22,10 @@ session_start();
    <li><a href="form.php" title="Formualarz rejestracji">Formularz rejestracji</a></li>
    <li><a href="login.php" title="Formualarz logowania">Formularz logowania</a></li>
    <li><a href="userpanel.php" title="Plik dla zalogowanych użytkowników">Panel użytkownika</a></li>
+   <li><a href="adminpanel.php" title="Plik dla zalogowanych użytkowników">Panel administratora</a></li>
   </ul>
  </nav>
-
+ 
  <section id="main">
  <?php
 $servername = "localhost";

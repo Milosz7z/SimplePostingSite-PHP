@@ -22,6 +22,7 @@ session_start();
    <li><a href="form.php" title="Formualarz rejestracji">Formularz rejestracji</a></li>
    <li><a href="login.php" title="Formualarz logowania">Formularz logowania</a></li>
    <li><a href="userpanel.php" title="Plik dla zalogowanych użytkowników">Panel użytkownika</a></li>
+   <li><a href="adminpanel.php" title="Plik dla zalogowanych użytkowników">Panel administratora</a></li>
   </ul>
  </nav>
 
@@ -32,13 +33,16 @@ session_start();
         return '<p>Czas sesji wygasł. Proszę zalogować się ponownie.</p><p> Za chwilę nastąpi przepierowanie</p>';
    }
 
-   if (isset($_SESSION['nick'])) {
+   if (isset($_SESSION['nick'])  && (isset($_SESSION['userlogin'])) && ($_SESSION['userlogin'] == 'admin')) {
+       echo 'Jesteś zalogowany jako: ';
+       echo $_SESSION['userlogin'];
+       echo '<br><br>';
        echo '<a id="editusers" href="editusers.php">Edytuj użytkowników</a><br>';
        echo '<a id="editposts" href="editposts.php">Edytuj posty</a><br>';
        echo '<a id="editpictures" href="editpictures.php">Edytuj obrazki</a><br>';
        echo '<a id="database" href="logout.php">Wyloguj</a>';
    } else {
-       echo '<p>Nie jesteś zalogowany. Przejdź do <a id="database" href="login.php">Formularza logowania</a>.</p>';
+       echo '<p>Nie jesteś zalogowany albo nie jesteś adminem. Przejdź do <a id="database" href="login.php">Formularza logowania</a>.</p>';
    }
  ?>
  </section>
