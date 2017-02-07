@@ -30,19 +30,48 @@ session_start();
      <?php
     if (empty($_COOKIE['islogged'])) {
         header('Refresh: 5; url=login.php');
-        return '<p>Czas sesji wygasł. Proszę zalogować się ponownie.</p><p> Za chwilę nastąpi przepierowanie</p>';
+        return '<p>Czas sesji wygasł. Proszę zalogować się ponownie.</p><p> Za chwilę nastąpi przekierowanie</p>';
    }
 
    if (isset($_SESSION['nick'])) {
-       echo '<form action="addpicturetodb.php" method="POST" id="register-form">';
-       echo'<fieldset>';
-	     echo'<dl>';
-		   echo'<dt><label for="obrazek">URL Obrazka:</label></dt>';
-		   echo'<dd><input type="text" name="obrazek" id="obrazek" placeholder="URL"></dd>';
-		   echo'<dt><input type="submit" name="check" value="Dodaj obrazek"></dt>';
-		   echo'</dl>';
-	     echo'</fieldset>';
-       echo'</form>';
+      $servername = "localhost";
+      $username = "root";
+      $password = "";
+      $dbname = "bazaint";
+      $author = $_SESSION['iduser'];
+
+      // Create connection
+      $conn = new mysqli($servername, $username, $password, $dbname);
+      // Check connection
+      if ($conn->connect_error) {
+          die("Connection failed: " . $conn->connect_error);
+      } 
+
+      $sql = "SELECT `posts`.*, `user`.*
+              FROM `posts`
+              LEFT JOIN `user` ON `posts`.`author_post` = `user`.`id_user`  
+              WHERE author_post = $author";
+      $result = $conn->query($sql);
+     
+
+
+      if ($result->num_rows > 0) {
+        echo "<table border><tr><th>ID POSTA</th><th>TEKST</th><th>AUTOR</th><th>USUŃ</th></tr>";
+        // output data of each row
+        while($row = $result->fetch_assoc()) {
+            echo "<tr>
+            <td>".$row["id_post"]."</td>
+            <td>".$row["text_post"]."</td>
+            <td>".$row["login"]."</td>
+            <td> <a href = deletepost.php?post_to_delete=$row[id_post] > Delete </a></td></tr>";
+        }
+        echo "</table>";
+    } else {
+        echo "0 POSTÓW";
+    }
+
+    $conn->close();
+
    }
      else {
        echo '<p>Nie jesteś zalogowany. Przejdź do <a id="database" href="login.php">Formularza logowania</a>.</p>';

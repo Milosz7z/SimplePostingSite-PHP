@@ -17,10 +17,10 @@ session_start();
  </header>
  <nav id="menu">
   <ul>
-      <li><a href="addpost.php" title="Formularz dodawania ciekawostki">Dodaj ciekawostkę</a></li>
-      <li><a href="addpicture.php" title="Formularz dodawania obrazka">Dodaj obrazek</a></li>
-   <li><a href="form.php" title="Formualarz rejestracji">Formularz rejestracji</a></li>
-   <li><a href="login.php" title="Formualarz logowania">Formularz logowania</a></li>
+   <li><a href="addpost.php" title="Formularz dodawania ciekawostki">Dodaj ciekawostkę</a></li>
+   <li><a href="addpicture.php" title="Formularz dodawania obrazka">Dodaj obrazek</a></li>
+   <li><a href="form.php" title="Formularz rejestracji">Formularz rejestracji</a></li>
+   <li><a href="login.php" title="Formularz logowania">Formularz logowania</a></li>
    <li><a href="userpanel.php" title="Plik dla zalogowanych użytkowników">Panel użytkownika</a></li>
    <li><a href="adminpanel.php" title="Plik dla zalogowanych użytkowników">Panel administratora</a></li>
   </ul>
@@ -33,7 +33,7 @@ session_start();
         return '<p>Czas sesji wygasł. Proszę zalogować się ponownie.</p><p> Za chwilę nastąpi przepierowanie</p>';
    }
 
-   if (isset($_SESSION['nick'])  && (isset($_SESSION['userlogin'])) && ($_SESSION['userlogin'] == 'admin')) {
+   if (isset($_SESSION['nick'])  && (isset($_SESSION['userlogin'])) && ($_SESSION['admin'] == true)) {
        echo 'Jesteś zalogowany jako: ';
        echo $_SESSION['userlogin'];
        echo '<br><br>';

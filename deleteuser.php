@@ -7,10 +7,17 @@
 		echo mysqli_connect_error();
 		exit;
 	}
-	$id_posta =  $_GET['user_to_delete'];
+	
+	$id_us =  $_GET['user_to_delete'];
 
-	$sql = "DELETE FROM user WHERE id_user='$id_user'";
-	$wynik = $polaczenie->query($sql);
+	$sqlus = "DELETE FROM user WHERE id_user='$id_us'";
+	$wynikus = $polaczenie->query($sqlus);
+
+	$sqlpo = "DELETE FROM posts WHERE author_post='$id_us'";
+	$wynikpo = $polaczenie->query($sqlpo);
+
+	$sqlpic = "DELETE FROM pictures WHERE author_picture='$id_us'";
+	$wynikpic = $polaczenie->query($sqlpic);
 
 
 	if($wynik==false)

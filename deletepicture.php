@@ -15,7 +15,7 @@
 
 	if($wynik==false)
 	{
-		echo"error";
+		echo"Błąd";
 	}
 
 	echo "<h1>Usuwanie z bazy danych</h1>";

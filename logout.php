@@ -16,8 +16,8 @@ session_start();
  </header>
  <nav id="menu">
   <ul>
-      <li><a href="addpost.php" title="Formularz dodawania ciekawostki">Dodaj ciekawostkę</a></li>
-      <li><a href="addpicture.php" title="Formularz dodawania obrazka">Dodaj obrazek</a></li>
+   <li><a href="addpost.php" title="Formularz dodawania ciekawostki">Dodaj ciekawostkę</a></li>
+   <li><a href="addpicture.php" title="Formularz dodawania obrazka">Dodaj obrazek</a></li>
    <li><a href="form.php" title="Formualarz rejestracji">Formularz rejestracji</a></li>
    <li><a href="login.php" title="Formualarz logowania">Formularz logowania</a></li>
    <li><a href="userpanel.php" title="Plik dla zalogowanych użytkowników">Panel użytkownika</a></li>

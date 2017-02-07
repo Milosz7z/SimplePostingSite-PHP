@@ -16,10 +16,10 @@ session_start();
  </header>
  <nav id="menu">
   <ul>
-      <li><a href="addpost.php" title="Formularz dodawania ciekawostki">Dodaj ciekawostkę</a></li>
-      <li><a href="addpicture.php" title="Formularz dodawania obrazka">Dodaj obrazek</a></li>
-   <li><a href="form.php" title="Formualarz rejestracji">Formularz rejestracji</a></li>
-   <li><a href="login.php" title="Formualarz logowania">Formularz logowania</a></li>
+   <li><a href="addpost.php" title="Formularz dodawania ciekawostki">Dodaj ciekawostkę</a></li>
+   <li><a href="addpicture.php" title="Formularz dodawania obrazka">Dodaj obrazek</a></li>
+   <li><a href="form.php" title="Formularz rejestracji">Formularz rejestracji</a></li>
+   <li><a href="login.php" title="Formularz logowania">Formularz logowania</a></li>
    <li><a href="userpanel.php" title="Plik dla zalogowanych użytkowników">Panel użytkownika</a></li>
    <li><a href="adminpanel.php" title="Plik dla zalogowanych użytkowników">Panel administratora</a></li>
   </ul>
@@ -32,7 +32,7 @@ session_start();
 	    $password = $_POST['password'];
 		 
 	    if (empty($login) || empty($password)) {
-		  return '<p>Wypełnij wszystkie dane.</p>';
+		  echo '<p>Wypełnij wszystkie dane.</p>';
 		} else {
 		    if (file_exists('config.php')) {
                 include_once('config.php');
@@ -48,11 +48,15 @@ session_start();
                 $login     = trim(strip_tags($mysqli -> real_escape_string($login)));
                 $password  = hash('sha256', trim(strip_tags($mysqli -> real_escape_string($password))));
 
-                $result = $mysqli -> query("SELECT login FROM `user` WHERE login = '$login' and password = '$password'");
+                $result = $mysqli -> query("SELECT login, id_user, admin FROM `user` WHERE login = '$login' and password = '$password'");
                 if ($result -> num_rows == 1) {
                     $row = $result -> fetch_row();
                     $username = $row[0];
+                    $iduser = $row[1];
+                    $admin = $row[2];
                     $_SESSION['userlogin'] = $username;
+                    $_SESSION['iduser'] = $iduser;
+                    $_SESSION['admin'] = $admin;
                     $_SESSION['nick'] = $row[0];
 
                     setcookie('islogged', 'islogged', time() + 3600); // 1h
